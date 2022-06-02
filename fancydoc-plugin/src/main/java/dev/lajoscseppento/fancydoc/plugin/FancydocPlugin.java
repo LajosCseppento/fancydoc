@@ -2,7 +2,6 @@ package dev.lajoscseppento.fancydoc.plugin;
 
 import dev.lajoscseppento.gradle.plugin.common.GradleVersion;
 import lombok.NonNull;
-import org.gradle.api.GradleException;
 import org.gradle.api.Plugin;
 import org.gradle.api.Project;
 import org.gradle.api.logging.Logger;
@@ -13,6 +12,7 @@ import org.gradle.external.javadoc.StandardJavadocDocletOptions;
 /** Fancydoc Gradle plugin. */
 public class FancydocPlugin implements Plugin<Project> {
   private static final String MINIMUM_GRADLE_VERSION = "7.0";
+  private static final String UTF_8 = "utf-8";
   private Project project;
   private Logger logger;
 
@@ -48,15 +48,15 @@ public class FancydocPlugin implements Plugin<Project> {
   private void configureMinimalJavadocOptions(Javadoc javadoc, MinimalJavadocOptions options) {
     logger.info("[{}] Configuring minimal options of {}", getClass().getSimpleName(), javadoc);
 
-    options.encoding("UTF-8");
+    options.encoding(UTF_8);
   }
 
   private void configureStandardJavadocDocletOptions(
       Javadoc javadoc, StandardJavadocDocletOptions options) {
     logger.info("[{}] Configuring standard options of {}", getClass().getSimpleName(), javadoc);
 
-    options.charSet("UTF-8");
-    options.docEncoding("UTF-8");
+    options.charSet(UTF_8);
+    options.docEncoding(UTF_8);
 
     options.linkSource(true);
   }

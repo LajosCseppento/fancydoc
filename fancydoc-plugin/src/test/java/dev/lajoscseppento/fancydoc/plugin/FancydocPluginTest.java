@@ -45,9 +45,9 @@ class FancydocPluginTest {
             javadoc -> {
               StandardJavadocDocletOptions options =
                   (StandardJavadocDocletOptions) javadoc.getOptions();
-              assertThat(options.getCharSet()).isEqualTo("UTF-8");
-              assertThat(options.getDocEncoding()).isEqualTo("UTF-8");
-              assertThat(options.getEncoding()).isEqualTo("UTF-8");
+              assertThat(options.getCharSet()).isEqualTo("utf-8");
+              assertThat(options.getDocEncoding()).isEqualTo("utf-8");
+              assertThat(options.getEncoding()).isEqualTo("utf-8");
               assertThat(options.isLinkSource()).isTrue();
             });
   }
