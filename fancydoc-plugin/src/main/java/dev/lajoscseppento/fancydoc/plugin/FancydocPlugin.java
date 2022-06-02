@@ -1,6 +1,6 @@
 package dev.lajoscseppento.fancydoc.plugin;
 
-import dev.lajoscseppento.fancydoc.plugin.impl.VersionComparator;
+import dev.lajoscseppento.gradle.plugin.common.GradleVersion;
 import lombok.NonNull;
 import org.gradle.api.GradleException;
 import org.gradle.api.Plugin;
@@ -18,7 +18,7 @@ public class FancydocPlugin implements Plugin<Project> {
 
   @Override
   public void apply(@NonNull Project project) {
-    checkGradleVersion(project.getGradle().getGradleVersion());
+    GradleVersion.of(project).requireAtLeast(MINIMUM_GRADLE_VERSION);
 
     this.project = project;
     logger = project.getLogger();
@@ -59,18 +59,5 @@ public class FancydocPlugin implements Plugin<Project> {
     options.docEncoding("UTF-8");
 
     options.linkSource(true);
-  }
-
-  // TODO This method is a candidate for moving to a common utility
-  private static void checkGradleVersion(String gradleVersion) {
-    int cmp = new VersionComparator().compare(MINIMUM_GRADLE_VERSION, gradleVersion);
-
-    if (cmp > 0) {
-      String msg =
-          String.format(
-              "Gradle version %s is too old, please use %s at least.",
-              gradleVersion, MINIMUM_GRADLE_VERSION);
-      throw new GradleException(msg);
-    }
   }
 }
