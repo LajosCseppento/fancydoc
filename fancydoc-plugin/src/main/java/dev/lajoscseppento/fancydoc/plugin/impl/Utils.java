@@ -14,8 +14,14 @@ import org.gradle.api.logging.Logging;
 class Utils {
   private static final Logger logger = Logging.getLogger(Utils.class);
 
-  void copyResource(@NonNull String resourceName, @NonNull Path targetDir) {
-    logger.debug("Copying resource {} to {}", resourceName, targetDir);
+  void copyResourceInto(@NonNull String resourceName, @NonNull Path targetDir) {
+    logger.debug("Copying resource {} into {}", resourceName, targetDir);
+
+    copyResource(resourceName, targetDir.resolve(resourceName));
+  }
+
+  void copyResource(@NonNull String resourceName, @NonNull Path targetFile) {
+    logger.debug("Copying resource {} to {}", resourceName, targetFile);
 
     URL resource = Utils.class.getResource('/' + resourceName);
     if (resource == null) {
@@ -23,11 +29,10 @@ class Utils {
     }
 
     try (InputStream is = resource.openStream()) {
-      Path target = targetDir.resolve(resourceName);
-      Files.createDirectories(target.getParent());
-      Files.copy(is, target);
+      Files.createDirectories(targetFile.getParent());
+      Files.copy(is, targetFile);
     } catch (Exception ex) {
-      throw new GradleException("Failed to copy " + resourceName + " to " + targetDir);
+      throw new GradleException("Failed to copy " + resourceName + " to " + targetFile);
     }
   }
 }

@@ -22,6 +22,11 @@ import org.jsoup.nodes.Node;
 
 /** Highlights Javadoc link source code using Prism. */
 public class LinkSourceSyntaxHighlightAction implements Action<Task> {
+  private static final String FANCYDOC_CSS = "fancydoc.css";
+  private static final String PRISM_LICENSE = "prism/LICENSE";
+  private static final String PRISM_CSS = "prism/prism.css";
+  private static final String PRISM_JS = "prism/prism.js";
+
   private Javadoc javadoc;
   private Logger logger;
   private Path srcHtmlDir;
@@ -80,10 +85,10 @@ public class LinkSourceSyntaxHighlightAction implements Action<Task> {
   }
 
   private void copyResources() {
-    Utils.copyResource("fancydoc.css", fancydocDir);
-    Utils.copyResource("prism/LICENSE", fancydocDir);
-    Utils.copyResource("prism/prism.css", fancydocDir);
-    Utils.copyResource("prism/prism.js", fancydocDir);
+    Utils.copyResourceInto(FANCYDOC_CSS, fancydocDir);
+    Utils.copyResourceInto(PRISM_LICENSE, fancydocDir);
+    Utils.copyResourceInto(PRISM_CSS, fancydocDir);
+    Utils.copyResourceInto(PRISM_JS, fancydocDir);
   }
 
   private void rewriteSourceFiles() throws IOException {
@@ -125,9 +130,9 @@ public class LinkSourceSyntaxHighlightAction implements Action<Task> {
     String relativePathToFancydocDir =
         file.getParent().relativize(fancydocDir).toString().replace('\\', '/');
 
-    addStylesheet(document, relativePathToFancydocDir + "/fancydoc.css");
+    addStylesheet(document, relativePathToFancydocDir + '/' + FANCYDOC_CSS);
     // JS import using file:/// URLs is supported by modern browsers due to security reasons
-    addScript(document, relativePathToFancydocDir + "/prism/prism.js");
+    addScript(document, relativePathToFancydocDir + '/' + PRISM_JS);
 
     Element pre = document.body().getElementsByTag("pre").get(0);
     Element code = document.createElement("code").attr("class", "language-java line-numbers");
