@@ -2,7 +2,7 @@
 
 [![Release](https://img.shields.io/github/v/release/LajosCseppento/fancydoc)](https://github.com/LajosCseppento/fancydoc/releases)
 [![Plugin Portal](https://img.shields.io/maven-metadata/v?label=Plugin%20Portal&metadataUrl=https://plugins.gradle.org/m2/dev/lajoscseppento/fancydoc/fancydoc-plugin/maven-metadata.xml)](https://plugins.gradle.org/plugin/dev.lajoscseppento.fancydoc)
-[![Maven Central](https://img.shields.io/maven-central/v/dev.lajoscseppento.gradle/fancydoc)](https://search.maven.org/search?q=g:%22dev.lajoscseppento.gradle%22%20AND%20a:%22fancydoc%22)
+[![Maven Central](https://img.shields.io/maven-central/v/dev.lajoscseppento.gradle/fancydoc)](https://search.maven.org/search?q=g:%22dev.lajoscseppento.fancydoc%22%20AND%20a:%22dev.lajoscseppento.fancydoc.gradle.plugin%22)
 [![CI](https://github.com/LajosCseppento/fancydoc/workflows/CI/badge.svg)](https://github.com/LajosCseppento/fancydoc/actions)
 [![License](https://img.shields.io/github/license/LajosCseppento/fancydoc)](https://github.com/LajosCseppento/fancydoc/blob/main/LICENSE)
 
