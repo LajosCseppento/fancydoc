@@ -8,6 +8,7 @@ ruthless.lombok()
 
 dependencies {
     implementation("dev.lajoscseppento.gradle:gradle-plugin-common:0.1.1")
+    implementation("org.jsoup:jsoup:1.15.1")
     functionalTestImplementation("commons-io:commons-io:2.11.0")
 }
 

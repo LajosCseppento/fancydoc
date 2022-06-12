@@ -86,16 +86,19 @@ class FancydocPluginFunctionalTest {
   private void checkBuildResult(BuildResult result) {
     assertThat(result.getOutput()).contains("Task :javadoc");
 
-    checkLinksource();
+    checkLinkSource();
   }
 
-  private void checkLinksource() {
+  private void checkLinkSource() {
     Path sourceFileInJavadoc =
         projectDir.resolve(
             "build/docs/javadoc/src-html/dev/lajoscseppento/fancydoc/example/Library.html");
+
     assertThat(sourceFileInJavadoc)
         .exists()
         .content()
-        .contains("package dev.lajoscseppento.fancydoc.example;");
+        .contains("package dev.lajoscseppento.fancydoc.example;")
+        .contains("<code class=\"language-java line-numbers\">")
+        .doesNotContain("<span class=\"sourceLineNo\">");
   }
 }
