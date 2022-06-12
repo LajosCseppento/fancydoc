@@ -87,7 +87,7 @@ public class LinkSourceSyntaxHighlightAction implements Action<Task> {
   }
 
   private void rewriteSourceFiles() throws IOException {
-    logger.debug("Walking files in {} ...", srcHtmlDir);
+    logger.debug("Looking for source code files in {} ...", srcHtmlDir);
 
     Files.walkFileTree(
         srcHtmlDir,
@@ -117,6 +117,7 @@ public class LinkSourceSyntaxHighlightAction implements Action<Task> {
     applySyntaxHighlighting(document, file);
 
     logger.debug("Writing file {}", file);
+    // Use LF, like javadoc does
     Files.writeString(file, document.outerHtml().replace("\r\n", "\n"));
   }
 
@@ -143,8 +144,8 @@ public class LinkSourceSyntaxHighlightAction implements Action<Task> {
         code.appendChild(childNode);
       }
 
-      // Leave the last text block with many empty lines out of <code>, but inside <pre>,
-      // as it was. This prevents line numbers to be put on them.
+      // Leave the last text block with many empty lines out of <code>, but inside <pre>, as it was.
+      // This prevents Prism adding line numbers on these empty lines.
     }
 
     pre.prependChild(code);

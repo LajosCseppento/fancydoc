@@ -1,6 +1,5 @@
 package dev.lajoscseppento.fancydoc.plugin.impl;
 
-import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 import java.nio.file.Files;
@@ -27,7 +26,7 @@ class Utils {
       Path target = targetDir.resolve(resourceName);
       Files.createDirectories(target.getParent());
       Files.copy(is, target);
-    } catch (IOException ex) {
+    } catch (Exception ex) {
       throw new GradleException("Failed to copy " + resourceName + " to " + targetDir);
     }
   }
