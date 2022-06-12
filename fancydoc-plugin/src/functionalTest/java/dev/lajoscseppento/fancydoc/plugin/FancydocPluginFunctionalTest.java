@@ -99,6 +99,10 @@ class FancydocPluginFunctionalTest {
         .content()
         .contains("package dev.lajoscseppento.fancydoc.example;")
         .contains("<code class=\"language-java line-numbers\">")
+        .contains(
+            "<link rel=\"stylesheet\" type=\"text/css\" href=\"../../../../../fancydoc/fancydoc.css\">")
+        .contains(
+            "<script type=\"text/javascript\" src=\"../../../../../fancydoc/prism/prism.js\"></script>")
         .doesNotContain("<span class=\"sourceLineNo\">");
   }
 }

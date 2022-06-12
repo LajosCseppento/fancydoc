@@ -125,7 +125,7 @@ public class LinkSourceSyntaxHighlightAction implements Action<Task> {
         file.getParent().relativize(fancydocDir).toString().replace('\\', '/');
 
     addStylesheet(document, relativePathToFancydocDir + "/fancydoc.css");
-    addScript(document, relativePathToFancydocDir + "/fancydoc.js");
+    // JS import using file:/// URLs is supported by modern browsers due to security reasons
     addScript(document, relativePathToFancydocDir + "/prism/prism.js");
 
     Element pre = document.body().getElementsByTag("pre").get(0);
