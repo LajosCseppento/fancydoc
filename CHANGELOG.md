@@ -11,3 +11,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Fancydoc sets UTF-8 encoding on all javadoc tasks
 - Fancydoc enables `-linksource` by default on all javadoc tasks
+- Fancydoc highlights generated Javadoc source code using [Prism](https://prismjs.com)

@@ -1,5 +1,6 @@
 package dev.lajoscseppento.fancydoc.plugin;
 
+import dev.lajoscseppento.fancydoc.plugin.impl.LinkSourceSyntaxHighlightAction;
 import dev.lajoscseppento.gradle.plugin.common.GradleVersion;
 import lombok.NonNull;
 import org.gradle.api.Plugin;
@@ -41,18 +42,21 @@ public class FancydocPlugin implements Plugin<Project> {
               if (options instanceof StandardJavadocDocletOptions) {
                 configureStandardJavadocDocletOptions(
                     javadoc, (StandardJavadocDocletOptions) options);
+
+                javadoc.doLast(new LinkSourceSyntaxHighlightAction());
               }
             });
   }
 
-  private void configureMinimalJavadocOptions(Javadoc javadoc, MinimalJavadocOptions options) {
+  private void configureMinimalJavadocOptions(
+      @NonNull Javadoc javadoc, @NonNull MinimalJavadocOptions options) {
     logger.info("[{}] Configuring minimal options of {}", getClass().getSimpleName(), javadoc);
 
     options.encoding(UTF_8);
   }
 
   private void configureStandardJavadocDocletOptions(
-      Javadoc javadoc, StandardJavadocDocletOptions options) {
+      @NonNull Javadoc javadoc, @NonNull StandardJavadocDocletOptions options) {
     logger.info("[{}] Configuring standard options of {}", getClass().getSimpleName(), javadoc);
 
     options.charSet(UTF_8);

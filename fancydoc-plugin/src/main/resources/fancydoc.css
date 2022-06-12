@@ -1,0 +1,18 @@
+/* Fancydoc CSS - https://github.com/LajosCseppento/fancydoc */
+
+@import url("prism/prism.css");
+
+/* Force Fancydoc styles */
+pre[class*=language-], code[class*=language-] {
+	background: white !important;
+}
+
+body, main, div.sourceContainer {
+	margin: 0 !important;
+	padding: 0 !important;
+}
+
+/* Just in case... */
+span.sourceLineNo {
+	display: none !important;
+}
