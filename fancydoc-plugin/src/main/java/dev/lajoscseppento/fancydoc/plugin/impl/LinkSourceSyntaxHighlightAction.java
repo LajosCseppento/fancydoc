@@ -134,6 +134,7 @@ public class LinkSourceSyntaxHighlightAction implements Action<Task> {
     // JS import using file:/// URLs is supported by modern browsers due to security reasons
     addScript(document, relativePathToFancydocDir + '/' + PRISM_JS);
 
+    // Update the HTML directly (with a simple JS solution the page "flashes" when loads)
     Element pre = document.body().getElementsByTag("pre").get(0);
     Element code = document.createElement("code").attr("class", "language-java line-numbers");
 

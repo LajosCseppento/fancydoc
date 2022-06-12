@@ -13,7 +13,6 @@ import org.junit.jupiter.api.io.TempDir;
 import org.mockito.Mockito;
 
 class LinkSourceSyntaxHighlightActionTest {
-
   @TempDir Path javadocDestinationDir;
 
   @Test
