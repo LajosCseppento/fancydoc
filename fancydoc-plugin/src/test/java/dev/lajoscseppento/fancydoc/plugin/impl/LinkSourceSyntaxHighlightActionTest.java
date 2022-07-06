@@ -5,6 +5,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Path;
+import java.util.Scanner;
 import org.gradle.api.logging.Logger;
 import org.gradle.api.tasks.javadoc.Javadoc;
 import org.gradle.external.javadoc.StandardJavadocDocletOptions;
@@ -36,7 +37,7 @@ class LinkSourceSyntaxHighlightActionTest {
     // Then
     String expected;
     try (InputStream is = getClass().getResourceAsStream("/Library.expected.html")) {
-      expected = new String(is.readAllBytes(), StandardCharsets.UTF_8);
+      expected = new Scanner(is, StandardCharsets.UTF_8.name()).useDelimiter("\\A").next();
     }
 
     assertThat(linkSourceFile).content().isEqualTo(expected);
