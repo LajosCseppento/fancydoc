@@ -32,8 +32,8 @@ public class FancydocPlugin implements Plugin<Project> {
   private void configureJavadoc() {
     project
         .getTasks()
-        .withType(
-            Javadoc.class,
+        .withType(Javadoc.class)
+        .configureEach(
             javadoc -> {
               MinimalJavadocOptions options = javadoc.getOptions();
 

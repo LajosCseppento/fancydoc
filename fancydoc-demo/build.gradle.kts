@@ -1,5 +1,6 @@
 plugins {
     `java-library`
+    `jvm-test-suite`
     id("dev.lajoscseppento.fancydoc") version "+"
 }
 
@@ -16,6 +17,10 @@ java {
     withSourcesJar()
 }
 
-tasks.withType<Test> {
-    useJUnitPlatform()
+testing {
+    suites {
+        val test by getting(JvmTestSuite::class) {
+            useJUnitJupiter()
+        }
+    }
 }
