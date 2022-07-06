@@ -11,6 +11,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Java 8 compatibility
 
+### Changed
+
+- Bump minimum Gradle version to 7.3.3
+
 ## [0.1.0] 2022-06-13
 
 ### Added

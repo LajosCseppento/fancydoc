@@ -47,13 +47,13 @@ class FancydocPluginFunctionalTest {
   }
 
   @Test
-  void testBuildWithGradle_7_0() {
+  void testBuildWithGradle_7_3_3() {
     // Given
     GradleRunner runner =
         GradleRunner.create()
             .forwardOutput()
             .withPluginClasspath()
-            .withGradleVersion("7.0")
+            .withGradleVersion("7.3.3")
             .withArguments("build")
             .withProjectDir(projectDir.toFile());
 
@@ -71,7 +71,7 @@ class FancydocPluginFunctionalTest {
         GradleRunner.create()
             .forwardOutput()
             .withPluginClasspath()
-            .withGradleVersion("6.9")
+            .withGradleVersion("7.3.2")
             .withArguments("build")
             .withProjectDir(projectDir.toFile());
 
