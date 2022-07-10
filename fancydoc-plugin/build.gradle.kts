@@ -9,17 +9,8 @@ ruthless.lombok()
 dependencies {
     implementation("dev.lajoscseppento.gradle:gradle-plugin-common:0.1.2")
     implementation("org.jsoup:jsoup:1.15.1")
-    testImplementation("org.mockito:mockito-core:4.6.1")
+    testImplementation("org.mockito:mockito-core")
     functionalTestImplementation("commons-io:commons-io:2.11.0")
-}
-
-java {
-    toolchain {
-        languageVersion.set(JavaLanguageVersion.of(8))
-    }
-
-    withJavadocJar()
-    withSourcesJar()
 }
 
 gradlePlugin {
