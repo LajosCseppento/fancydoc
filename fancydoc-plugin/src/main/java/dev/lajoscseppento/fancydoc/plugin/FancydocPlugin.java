@@ -12,7 +12,7 @@ import org.gradle.external.javadoc.StandardJavadocDocletOptions;
 
 /** Fancydoc Gradle plugin. */
 public class FancydocPlugin implements Plugin<Project> {
-  private static final String MINIMUM_GRADLE_VERSION = "7.3.3";
+  private static final String MINIMUM_GRADLE_VERSION = "7.5.1";
   private static final String UTF_8 = "utf-8";
   private Project project;
   private Logger logger;

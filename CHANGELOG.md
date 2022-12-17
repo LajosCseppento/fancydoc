@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - Upgrade to Gradle 7.5.1
+- Bump minimum Gradle version to 7.5.1
 
 ## [0.1.1] 2022-07-06
 
