@@ -11,6 +11,7 @@ import org.apache.commons.io.FilenameUtils;
 import org.gradle.testkit.runner.BuildResult;
 import org.gradle.testkit.runner.GradleRunner;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
@@ -29,6 +30,7 @@ class FancydocPluginFunctionalTest {
         || FilenameUtils.isExtension(file.getName(), "java", "kts", "properties");
   }
 
+  @Disabled
   @Test
   void testBuild() {
     // Given
@@ -46,6 +48,7 @@ class FancydocPluginFunctionalTest {
     checkBuildResult(result);
   }
 
+  @Disabled
   @Test
   void testBuildWithGradle_7_3_3() {
     // Given

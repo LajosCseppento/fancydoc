@@ -1,10 +1,9 @@
 plugins {
     id("com.gradle.plugin-publish") version "1.0.0-rc-2"
     id("dev.lajoscseppento.ruthless.java-gradle-plugin")
+    id("pl.droidsonroids.jacoco.testkit") version "1.0.9"
     signing
 }
-
-ruthless.lombok()
 
 dependencies {
     implementation("dev.lajoscseppento.gradle:gradle-plugin-common:0.1.2")
@@ -39,6 +38,53 @@ pluginBundle {
     vcsUrl = VCS_URL
     website = WEBSITE
 }
+
+// Set up JaCoCo coverage for Gradle TestKit tests
+val functionalTest = tasks.named("functionalTest")
+val jacocoTestReport = tasks.named("jacocoTestReport")
+
+functionalTest.configure {
+    finalizedBy(jacocoTestReport)
+
+    // See https://github.com/koral--/jacoco-gradle-testkit-plugin/issues/9
+    doLast {
+        val jacocoTestExec = checkNotNull(extensions.getByType(JacocoTaskExtension::class).destinationFile)
+        val delayMs = 1000L
+        val intervalMs = 200L
+        val maxRetries = 50
+        var retries = 0
+
+        TimeUnit.MILLISECONDS.sleep(delayMs) // Linux
+
+        while (!(jacocoTestExec.exists() && jacocoTestExec.renameTo(jacocoTestExec))) { // Windows
+            if (retries >= maxRetries) {
+                val waitTime = delayMs + intervalMs * retries
+                throw GradleException("$jacocoTestExec.name is not ready, waited at least $waitTime ms")
+            }
+
+            retries++
+            logger.info("Waiting $intervalMs ms for $jacocoTestExec to be ready, try #$retries...")
+            TimeUnit.MILLISECONDS.sleep(intervalMs)
+        }
+
+        logger.info("$jacocoTestExec is ready")
+    }
+}
+
+jacocoTestReport.configure {
+    dependsOn(functionalTest)
+    (this as JacocoReport).executionData.from(buildDir.absolutePath + "/jacoco/functionalTest.exec")
+}
+
+tasks.named("compileFunctionalTestJava").configure {
+    dependsOn("generateJacocoFunctionalTestKitProperties")
+}
+
+jacocoTestKit {
+    applyTo("functionalTestImplementation", functionalTest)
+}
+
+/////////////////////
 
 if (hasProperty("ossrhUsername")) {
     publishing {
@@ -103,9 +149,19 @@ publishing.publications.withType<MavenPublication> {
     }
 }
 
-sonarqube {
-    properties {
-        val orig = properties["sonar.tests"] as MutableList<Any>
-        properties["sonar.tests"] = orig + sourceSets.functionalTest.get().allSource.srcDirs.filter { it.exists() }
-    }
-}
+//sonarqube {
+//    properties {
+//        val orig = properties["sonar.tests"] as MutableList<Any>
+//        properties["sonar.tests"] = orig + sourceSets.functionalTest.get().allSource.srcDirs.filter { it.exists() }
+//        print(properties["sonar.tests"])
+//    }
+//}
+
+//afterEvaluate sonarqube {
+//        properties{
+//            print(properties["sonar.tests"])
+//        }
+//    }
+//}
+
+//        print(sonarqube.properties["sonar.tests"])

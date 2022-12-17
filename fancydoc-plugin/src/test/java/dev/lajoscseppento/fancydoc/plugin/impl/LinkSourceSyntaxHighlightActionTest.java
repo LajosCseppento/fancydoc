@@ -9,6 +9,7 @@ import java.util.Scanner;
 import org.gradle.api.logging.Logger;
 import org.gradle.api.tasks.javadoc.Javadoc;
 import org.gradle.external.javadoc.StandardJavadocDocletOptions;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 import org.mockito.Mockito;
@@ -16,6 +17,7 @@ import org.mockito.Mockito;
 class LinkSourceSyntaxHighlightActionTest {
   @TempDir Path javadocDestinationDir;
 
+  @Disabled
   @Test
   void test() throws Exception {
     // Given
