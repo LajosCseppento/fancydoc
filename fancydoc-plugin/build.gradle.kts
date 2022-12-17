@@ -1,27 +1,14 @@
 plugins {
-    id("com.gradle.plugin-publish") version "1.0.0-rc-2"
+    id("com.gradle.plugin-publish") version "1.1.0"
     id("dev.lajoscseppento.ruthless.java-gradle-plugin")
     signing
 }
 
-ruthless.lombok()
-
 dependencies {
-    implementation("dev.lajoscseppento.gradle:gradle-plugin-common:0.1.2")
-    implementation("org.jsoup:jsoup:1.15.1")
+    implementation("dev.lajoscseppento.gradle:gradle-plugin-common:0.2.0")
+    implementation("org.jsoup:jsoup:1.15.3")
     testImplementation("org.mockito:mockito-core")
     functionalTestImplementation("commons-io:commons-io:2.11.0")
-}
-
-gradlePlugin {
-    plugins {
-        create("fancydoc") {
-            id = "dev.lajoscseppento.fancydoc"
-            implementationClass = "dev.lajoscseppento.fancydoc.plugin.FancydocPlugin"
-            displayName = "Fancydoc"
-            description = "Fancydoc plugin"
-        }
-    }
 }
 
 val TAGS = listOf("fancydoc", "javadoc", "documentation", "docs")
@@ -38,6 +25,17 @@ pluginBundle {
     tags = TAGS
     vcsUrl = VCS_URL
     website = WEBSITE
+}
+
+gradlePlugin {
+    plugins {
+        create("fancydoc") {
+            id = "dev.lajoscseppento.fancydoc"
+            implementationClass = "dev.lajoscseppento.fancydoc.plugin.FancydocPlugin"
+            displayName = "Fancydoc"
+            description = DESCRIPTION
+        }
+    }
 }
 
 if (hasProperty("ossrhUsername")) {
