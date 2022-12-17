@@ -13,3 +13,21 @@ Features:
 * set UTF-8 encoding on all javadoc tasks
 * enable `-linksource` on all javadoc tasks (this makes the generated javadoc to contain the complete source code)
 * highlights generated Javadoc source code using [Prism](https://prismjs.com)
+
+## Development Guide
+
+### Release Procedure
+
+1. Release commit: fix version, finalise change log (don't forget about the links in the bottom of
+   the change log)
+2. Check CI for success
+3. Tag release on GitHub (draft)
+4. Publish to Maven Central
+    1. Run `./gradlew publishAllPublicationsToStagingRepository`
+    2. Open https://oss.sonatype.org/#stagingRepositories
+    3. Close staging repository
+    4. Inspect contents
+    5. Release
+5. Publish to Gradle Plugin Portal using `./gradlew publishPlugins`
+6. Publish release on GitHub
+7. Bump version
