@@ -76,8 +76,10 @@ public class LinkSourceSyntaxHighlightAction implements Action<Task> {
       srcHtmlDir = javadocDir.resolve("src-html");
       fancydocDir = javadocDir.resolve("fancydoc");
 
-      copyResources();
-      rewriteSourceFiles();
+      if (Files.exists(srcHtmlDir)) {
+        copyResources();
+        rewriteSourceFiles();
+      }
     } catch (Exception ex) {
       throw new GradleException(
           "Failed to add syntax highlighting to generated Javadoc source code: " + ex.getMessage(),

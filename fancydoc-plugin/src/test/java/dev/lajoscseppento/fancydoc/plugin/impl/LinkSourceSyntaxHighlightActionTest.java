@@ -42,4 +42,22 @@ class LinkSourceSyntaxHighlightActionTest {
 
     assertThat(linkSourceFile).content().isEqualTo(expected);
   }
+
+  @Test
+  void testMissingJavadoc() {
+    // Given
+    StandardJavadocDocletOptions options = Mockito.mock(StandardJavadocDocletOptions.class);
+    Mockito.doReturn(true).when(options).isLinkSource();
+
+    Javadoc javadoc = Mockito.mock(Javadoc.class);
+    Mockito.doReturn(Mockito.mock(Logger.class)).when(javadoc).getLogger();
+    Mockito.doReturn(javadocDestinationDir.toFile()).when(javadoc).getDestinationDir();
+    Mockito.doReturn(options).when(javadoc).getOptions();
+
+    // When
+    new LinkSourceSyntaxHighlightAction().execute(javadoc);
+
+    // Then
+    assertThat(javadocDestinationDir).isEmptyDirectory();
+  }
 }
