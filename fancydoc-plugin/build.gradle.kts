@@ -1,12 +1,12 @@
 plugins {
-    id("com.gradle.plugin-publish") version "1.1.0"
+    id("com.gradle.plugin-publish") version "1.2.0"
     id("dev.lajoscseppento.ruthless.java-gradle-plugin")
     signing
 }
 
 dependencies {
-    implementation("dev.lajoscseppento.gradle:gradle-plugin-common:0.2.0")
-    implementation("org.jsoup:jsoup:1.15.3")
+    implementation("dev.lajoscseppento.gradle:gradle-plugin-common:0.4.0")
+    implementation("org.jsoup:jsoup:1.15.4")
     testImplementation("org.mockito:mockito-core")
     functionalTestImplementation("commons-io:commons-io:2.11.0")
 }

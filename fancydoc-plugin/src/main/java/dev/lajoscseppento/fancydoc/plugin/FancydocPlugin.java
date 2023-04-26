@@ -1,7 +1,7 @@
 package dev.lajoscseppento.fancydoc.plugin;
 
 import dev.lajoscseppento.fancydoc.plugin.impl.LinkSourceSyntaxHighlightAction;
-import dev.lajoscseppento.gradle.plugin.common.GradleVersion;
+import dev.lajoscseppento.gradle.plugin.common.CurrentGradleVersion;
 import lombok.NonNull;
 import org.gradle.api.Plugin;
 import org.gradle.api.Project;
@@ -12,14 +12,14 @@ import org.gradle.external.javadoc.StandardJavadocDocletOptions;
 
 /** Fancydoc Gradle plugin. */
 public class FancydocPlugin implements Plugin<Project> {
-  private static final String MINIMUM_GRADLE_VERSION = "7.5.1";
+  private static final String MINIMUM_GRADLE_VERSION = "7.6.1";
   private static final String UTF_8 = "utf-8";
   private Project project;
   private Logger logger;
 
   @Override
   public void apply(@NonNull Project project) {
-    GradleVersion.of(project).requireAtLeast(MINIMUM_GRADLE_VERSION);
+    CurrentGradleVersion.requireAtLeast(MINIMUM_GRADLE_VERSION);
 
     this.project = project;
     logger = project.getLogger();
