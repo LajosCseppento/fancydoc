@@ -7,7 +7,7 @@ pluginManagement {
 }
 
 plugins {
-    id("dev.lajoscseppento.ruthless") version "0.7.0"
+    id("dev.lajoscseppento.ruthless")
     id("com.gradle.enterprise") version "+"
 }
 
