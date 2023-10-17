@@ -37,7 +37,7 @@ class LinkSourceSyntaxHighlightActionTest {
     // Then
     String expected;
     try (InputStream is = getClass().getResourceAsStream("/Library.expected.html")) {
-      expected = new Scanner(is, StandardCharsets.UTF_8.name()).useDelimiter("\\A").next();
+      expected = new Scanner(is, StandardCharsets.UTF_8).useDelimiter("\\A").next();
     }
 
     assertThat(linkSourceFile).content().isEqualTo(expected);

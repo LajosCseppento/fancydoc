@@ -56,25 +56,6 @@ class FancydocPluginFunctionalTest {
   }
 
   @Test
-  void testBuildWithGradle_7_5_1() {
-    // Given
-    setUpDemoProject();
-
-    GradleRunner runner =
-        GradleRunner.create()
-            .forwardOutput()
-            .withPluginClasspath()
-            .withArguments("build")
-            .withProjectDir(projectDir.toFile());
-
-    // When
-    BuildResult result = runner.build();
-
-    // Then
-    checkBuildResult(result);
-  }
-
-  @Test
   void testBuildFailsWithTooOldGradleVersion() {
     // Given
     setUpDemoProject();
@@ -83,7 +64,7 @@ class FancydocPluginFunctionalTest {
         GradleRunner.create()
             .forwardOutput()
             .withPluginClasspath()
-            .withGradleVersion("7.4.2")
+            .withGradleVersion("8.3")
             .withArguments("build")
             .withProjectDir(projectDir.toFile());
 

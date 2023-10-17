@@ -1,7 +1,6 @@
 package dev.lajoscseppento.fancydoc.plugin.impl;
 
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 import java.nio.file.FileVisitResult;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -47,8 +46,8 @@ public class LinkSourceSyntaxHighlightAction implements Action<Task> {
     logger = javadoc.getLogger();
 
     MinimalJavadocOptions options = javadoc.getOptions();
-    if (options instanceof StandardJavadocDocletOptions) {
-      if (((StandardJavadocDocletOptions) options).isLinkSource()) {
+    if (options instanceof StandardJavadocDocletOptions standardJavadocDocletOptions) {
+      if (standardJavadocDocletOptions.isLinkSource()) {
         applySyntaxHighlighting();
       } else {
         logger.warn(
@@ -99,7 +98,7 @@ public class LinkSourceSyntaxHighlightAction implements Action<Task> {
 
     Files.walkFileTree(
         srcHtmlDir,
-        new SimpleFileVisitor<Path>() {
+        new SimpleFileVisitor<>() {
           @Override
           public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) {
             if (file.getFileName().toString().endsWith(".html")) {
@@ -126,7 +125,7 @@ public class LinkSourceSyntaxHighlightAction implements Action<Task> {
 
     logger.debug("Writing file {}", file);
     // Use LF, like javadoc does
-    Files.write(file, document.outerHtml().replace("\r\n", "\n").getBytes(StandardCharsets.UTF_8));
+    Files.writeString(file, document.outerHtml().replace("\r\n", "\n"));
   }
 
   private void applySyntaxHighlighting(Document document, Path file) {

@@ -1,14 +1,14 @@
 plugins {
-    id("com.gradle.plugin-publish") version "1.2.0"
+    id("com.gradle.plugin-publish")
     id("dev.lajoscseppento.ruthless.java-gradle-plugin")
     signing
 }
 
 dependencies {
-    implementation("dev.lajoscseppento.gradle:gradle-plugin-common:0.4.0")
-    implementation("org.jsoup:jsoup:1.15.4")
+    implementation("dev.lajoscseppento.gradle:gradle-plugin-common:0.5.0")
+    implementation("org.jsoup:jsoup:1.16.1")
     testImplementation("org.mockito:mockito-core")
-    functionalTestImplementation("commons-io:commons-io:2.11.0")
+    functionalTestImplementation("commons-io:commons-io:2.14.0")
 }
 
 val TAGS = listOf("fancydoc", "javadoc", "documentation", "docs")
@@ -16,24 +16,30 @@ val DESCRIPTION = "Fancy Javadoc for Gradle projects"
 val VCS_URL = "https://github.com/LajosCseppento/fancydoc.git"
 val WEBSITE = "https://github.com/LajosCseppento/fancydoc"
 
+val PLUGIN_MAVEN_PUBLICATION_NAME = "Fancydoc"
+
+val LICENSE_NAME = "Apache License, Version 2.0"
+val LICENSE_URL = "https://www.apache.org/licenses/LICENSE-2.0"
+
+val DEVELOPER_ID = "LajosCseppento"
+val DEVELOPER_NAME = "Lajos Cseppentő"
+val DEVELOPER_URL = "https://www.lajoscseppento.dev"
+
 val POM_SCM_CONNECTION = "scm:git:git://github.com/LajosCseppento/fancydoc.git"
 val POM_SCM_DEVELOPER_CONNECTION = "scm:git:ssh://git@github.com/LajosCseppento/fancydoc.git"
 val POM_SCM_URL = "https://github.com/LajosCseppento/fancydoc"
 
-pluginBundle {
-    description = DESCRIPTION
-    tags = TAGS
-    vcsUrl = VCS_URL
-    website = WEBSITE
-}
-
 gradlePlugin {
+    website.set(WEBSITE)
+    vcsUrl.set(VCS_URL)
+
     plugins {
         create("fancydoc") {
             id = "dev.lajoscseppento.fancydoc"
             implementationClass = "dev.lajoscseppento.fancydoc.plugin.FancydocPlugin"
             displayName = "Fancydoc"
             description = DESCRIPTION
+            tags.set(TAGS)
         }
     }
 }
@@ -72,7 +78,7 @@ publishing.publications.withType<MavenPublication> {
 
     pom {
         if (publicationName == "pluginMaven") {
-            name.set("Fancydoc")
+            name.set(PLUGIN_MAVEN_PUBLICATION_NAME)
             description.set(DESCRIPTION)
         }
 
@@ -80,16 +86,16 @@ publishing.publications.withType<MavenPublication> {
 
         licenses {
             license {
-                name.set("Apache License, Version 2.0")
-                url.set("https://www.apache.org/licenses/LICENSE-2.0")
+                name.set(LICENSE_NAME)
+                url.set(LICENSE_URL)
             }
         }
 
         developers {
             developer {
-                id.set("LajosCseppento")
-                name.set("Lajos Cseppentő")
-                this.url.set("https://www.lajoscseppento.dev")
+                id.set(DEVELOPER_ID)
+                name.set(DEVELOPER_NAME)
+                url.set(DEVELOPER_URL)
             }
         }
 
@@ -103,7 +109,8 @@ publishing.publications.withType<MavenPublication> {
 
 sonarqube {
     properties {
-        val orig = properties["sonar.tests"] as MutableList<Any>
+        @Suppress("UNCHECKED_CAST")
+        val orig = properties["sonar.tests"] as Collection<Any>
         properties["sonar.tests"] = orig + sourceSets.functionalTest.get().allSource.srcDirs.filter { it.exists() }
     }
 }

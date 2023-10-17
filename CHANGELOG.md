@@ -7,6 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- Upgrade to Ruthless 0.8.0, Java 17 & Gradle 8.4
+
+### Removed
+
+- Java 11 support
+- Gradle 7 support
+
 ## [0.3.0] 2023-04-26
 
 ### Changed
